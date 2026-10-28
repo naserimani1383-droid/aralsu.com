@@ -1,32 +1,35 @@
 <!--
-  اسلایدر نمونه کارها - aralsu.com (نسخه ۲)
-  استفاده: در وردپرس بلوک "HTML سفارشی" (یا ویجت HTML المنتور) را اضافه کن و کل این کد را داخلش بگذار.
-  اندازه: اسلایدر خودش را با عرض جایی که قرار می‌گیرد تنظیم می‌کند (ستون، کانتینر، تمام‌عرض).
-  رنگ برند: فقط ۴ متغیر اول (--arl-aqua و ...) را عوض کن.
-  عکس‌ها: آدرس REPLACE-1 تا REPLACE-4 را با عکس واقعی پروژه‌ها عوض کن.
+  اسلایدر نمونه کارها - aralsu.com (نسخه ۳ - متن روی عکس)
+  استفاده: در المنتور ویجت "HTML" (یا بلوک HTML سفارشی وردپرس) را اضافه کن و کل این کد را داخلش بگذار.
+
+  اندازه عکس:
+    دسکتاپ (src):      2000 × 1000 px  (نسبت 2:1)  - سوژه اصلی در ۶۰٪ چپ عکس، سمت راست برای متن خلوت باشد
+    موبایل (data-m):   1080 × 1440 px  (نسبت 3:4)  - سوژه اصلی در ۵۵٪ بالای عکس، پایین برای متن خلوت باشد
+    فرمت WebP یا JPG، حجم زیر 300KB
+    اگر data-m را خالی بگذاری، در موبایل همان عکس دسکتاپ (کراپ‌شده از وسط) نمایش داده می‌شود.
+  رنگ برند: فقط ۴ متغیر اول (--arl-ink و ...) را عوض کن.
+  عکس‌ها: REPLACE-2 و REPLACE-4 را با عکس واقعی عوض کن.
 -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vazirmatn@33.0.3/Vazirmatn-font-face.css">
 <style>
 .arl-wrap{container:arlw/inline-size;width:100%}
-.arl{--arl-ink:#050f1d;--arl-deep:#0a2a4a;--arl-aqua:#2ee6d6;--arl-sky:#4aa8ff;--d:6s;
-  position:relative;direction:rtl;width:100%;margin:0 auto;aspect-ratio:16/7;min-height:460px;border-radius:26px;overflow:hidden;
+.arl{--arl-ink:#050f1d;--arl-deep:#0a2a4a;--arl-aqua:#2ee6d6;--arl-sky:#4aa8ff;--d:7s;
+  position:relative;direction:rtl;width:100%;max-width:1400px;margin:0 auto;aspect-ratio:2/1;min-height:460px;border-radius:26px;overflow:hidden;
   background:var(--arl-ink);color:#fff;isolation:isolate;touch-action:pan-y;outline:none;
   box-shadow:0 40px 80px -30px rgba(5,15,29,.7),0 0 0 1px rgba(255,255,255,.06) inset}
 .arl,.arl *{box-sizing:border-box;font-family:'Vazirmatn',Vazir,Tahoma,sans-serif;letter-spacing:0}
 
-/* اسلاید */
-.arl-slide{position:absolute;inset:0;opacity:0;visibility:hidden;transition:opacity 1s ease,visibility 1s}
+/* اسلاید: عکس تمام‌قاب، گرادیان فقط سمت متن */
+.arl-slide{position:absolute;inset:0;display:flex;align-items:center;padding:84px 56px 112px;opacity:0;visibility:hidden;transition:opacity 1s ease,visibility 1s}
 .arl-slide.on{opacity:1;visibility:visible}
-.arl-bg{position:absolute;inset:0;overflow:hidden;background:linear-gradient(135deg,#071a30,#0b4a78)}
-.arl-bg::before{content:"";position:absolute;inset:-20%;background:radial-gradient(40% 50% at 20% 25%,rgba(46,230,214,.38),transparent 70%),radial-gradient(45% 55% at 80% 75%,rgba(74,168,255,.38),transparent 70%);animation:arldrift 14s ease-in-out infinite alternate}
-@keyframes arldrift{to{transform:translate3d(6%,-5%,0) scale(1.12)}}
-.arl-slide img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.14);transition:transform 10s cubic-bezier(.2,.6,.2,1)}
-.arl-slide.on img{transform:scale(1)}
-.arl-slide::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(5,15,29,.97) 0%,rgba(5,15,29,.6) 36%,rgba(5,15,29,.08) 72%),linear-gradient(to left,rgba(5,15,29,.55),transparent 58%)}
+.arl-bg{position:absolute;inset:0;background:linear-gradient(135deg,#071a30,#0b4a78)}
+.arl-slide img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.06);transition:transform 9s ease-out}
+.arl-slide.on img{transform:none}
+.arl-slide::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(5,15,29,.8),transparent 30%),linear-gradient(to left,rgba(5,15,29,.86),rgba(5,15,29,.5) 32%,transparent 58%)}
 
 /* متن */
-.arl-body{position:absolute;z-index:2;right:56px;bottom:136px;max-width:600px}
-.arl-body>*{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
+.arl-body{position:relative;z-index:2;max-width:520px}
+.arl-body>*{opacity:0;transform:translateY(24px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
 .arl-slide.on .arl-body>*{opacity:1;transform:none}
 .arl-slide.on .arl-body>:nth-child(1){transition-delay:.3s}
 .arl-slide.on .arl-body>:nth-child(2){transition-delay:.45s}
@@ -34,77 +37,69 @@
 .arl-slide.on .arl-body>:nth-child(4){transition-delay:.75s}
 .arl-chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
 .arl-chip{padding:6px 15px;border-radius:99px;font-size:13px;font-weight:500;background:rgba(255,255,255,.1);backdrop-filter:blur(10px);border:1px solid rgba(46,230,214,.45);color:#d9fffb}
-.arl-body h2{margin:0 0 12px;font-size:40px;line-height:1.55;font-weight:800;color:#fff;text-shadow:0 2px 24px rgba(0,0,0,.45)}
-.arl-body p{margin:0 0 26px;font-size:16px;line-height:2;font-weight:400;color:rgba(255,255,255,.85)}
+.arl-body h2{margin:0 0 12px;font-size:clamp(26px,3.2cqw,44px);line-height:1.55;font-weight:800;color:#fff;text-shadow:0 2px 20px rgba(0,0,0,.4)}
+.arl-body p{margin:0 0 24px;font-size:16px;line-height:2;color:rgba(255,255,255,.88)}
 .arl-btn{display:inline-flex;align-items:center;gap:10px;padding:13px 28px;border-radius:99px;background:linear-gradient(100deg,var(--arl-aqua),var(--arl-sky));color:#03202e!important;font-weight:700;font-size:15px;text-decoration:none!important;box-shadow:0 10px 30px -10px var(--arl-aqua);transition:transform .3s,box-shadow .3s}
 .arl-btn span{display:inline-block;transition:transform .3s}
 .arl-btn:hover{transform:translateY(-3px);box-shadow:0 16px 34px -10px var(--arl-aqua)}
 .arl-btn:hover span{transform:translateX(-5px)}
 
 /* بالا */
-.arl-top{position:absolute;z-index:4;top:28px;right:32px;left:32px;display:flex;justify-content:space-between;align-items:center;gap:12px}
-.arl-label{font-size:14px;font-weight:700;padding:8px 18px;border-radius:99px;background:rgba(255,255,255,.1);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.14)}
-.arl-count{font-size:17px;font-weight:700;margin-inline-start:14px;opacity:.9;direction:rtl}
+.arl-top{position:absolute;z-index:4;top:26px;right:32px;left:32px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.arl-label{font-size:14px;font-weight:700;padding:8px 18px;border-radius:99px;background:rgba(5,15,29,.35);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.18)}
+.arl-count{font-size:16px;font-weight:700;margin-inline-start:12px;opacity:.9;direction:rtl}
 .arl-nav{display:flex;align-items:center;gap:10px;direction:ltr}
-.arl-arrow{all:unset;box-sizing:border-box;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;cursor:pointer;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.22);backdrop-filter:blur(10px);transition:background .3s,transform .3s,border-color .3s}
+.arl-arrow{all:unset;box-sizing:border-box;width:42px;height:42px;border-radius:50%;display:grid;place-items:center;cursor:pointer;background:rgba(5,15,29,.35);border:1px solid rgba(255,255,255,.25);backdrop-filter:blur(10px);transition:background .3s,transform .3s}
 .arl-arrow:hover{background:linear-gradient(135deg,var(--arl-aqua),var(--arl-sky));border-color:transparent;transform:scale(1.1)}
 .arl-arrow:hover svg{stroke:#03202e}
 .arl-arrow:focus-visible,.arl-tab:focus-visible{outline:2px solid var(--arl-aqua);outline-offset:3px;border-radius:6px}
-.arl-arrow svg{width:20px;height:20px;stroke:#fff;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;transition:stroke .3s}
+.arl-arrow svg{width:19px;height:19px;stroke:#fff;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
 
 /* تب‌ها و خط پیشرفت */
 .arl-tabs{position:absolute;z-index:4;right:32px;left:32px;bottom:24px;display:flex;gap:18px}
-.arl-tab{all:unset;box-sizing:border-box;flex:1;min-width:0;cursor:pointer;display:block;opacity:.55;transition:opacity .4s}
+.arl-tab{all:unset;box-sizing:border-box;flex:1;min-width:0;cursor:pointer;opacity:.6;transition:opacity .4s}
 .arl-tab:hover,.arl-tab.on{opacity:1}
-.arl-tab.done{opacity:.8}
-.arl-track{position:relative;display:block;height:3px;border-radius:4px;background:rgba(255,255,255,.2);margin-bottom:11px;transition:height .45s cubic-bezier(.2,.7,.2,1),background .4s}
-.arl-tab.on .arl-track,.arl-tab:hover .arl-track{height:6px;background:rgba(255,255,255,.28)}
+.arl-tab.done{opacity:.85}
+.arl-track{position:relative;display:block;height:4px;border-radius:4px;background:rgba(255,255,255,.28);margin-bottom:10px;transition:height .4s}
+.arl-tab.on .arl-track,.arl-tab:hover .arl-track{height:6px}
 .arl-fill{position:absolute;top:0;bottom:0;right:0;width:0;border-radius:inherit;background:linear-gradient(to left,var(--arl-aqua),var(--arl-sky))}
-.arl-tab.done .arl-fill{width:100%;opacity:.7}
-.arl-tab.on .arl-fill{animation:arlfill var(--d) cubic-bezier(.25,.1,.25,1) forwards;will-change:width}
-.arl-tab.on .arl-fill::after{content:"";position:absolute;left:-7px;top:50%;width:14px;height:14px;margin-top:-7px;border-radius:50%;background:#fff;box-shadow:0 0 0 4px rgba(46,230,214,.35),0 0 18px 4px var(--arl-aqua);animation:arlpulse 1.6s ease-in-out infinite}
-.arl-tab.on .arl-fill::before{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(100deg,transparent 30%,rgba(255,255,255,.55) 50%,transparent 70%);background-size:200% 100%;animation:arlshine 1.8s linear infinite}
-.arl:hover .arl-tab.on .arl-fill,.arl:focus-within .arl-tab.on .arl-fill,.arl:hover .arl-fill::before,.arl:hover .arl-fill::after{animation-play-state:paused}
+.arl-tab.done .arl-fill{width:100%;opacity:.75}
+.arl-tab.on .arl-fill{animation:arlfill var(--d) linear forwards}
+.arl-tab.on .arl-fill::after{content:"";position:absolute;left:-6px;top:50%;width:12px;height:12px;margin-top:-6px;border-radius:50%;background:#fff;box-shadow:0 0 0 4px rgba(46,230,214,.35),0 0 14px 3px var(--arl-aqua)}
 @keyframes arlfill{from{width:0}to{width:100%}}
-@keyframes arlpulse{50%{box-shadow:0 0 0 7px rgba(46,230,214,.12),0 0 24px 7px var(--arl-aqua)}}
-@keyframes arlshine{from{background-position:200% 0}to{background-position:-200% 0}}
-.arl-city{display:block;font-size:12px;font-weight:500;color:var(--arl-aqua)}
-.arl-name{display:block;font-size:14px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+@media(hover:hover){.arl:hover .arl-tab.on .arl-fill{animation-play-state:paused}}
+.arl:focus-within .arl-tab.on .arl-fill{animation-play-state:paused}
+.arl-city{display:block;font-size:12px;font-weight:600;color:var(--arl-aqua);text-shadow:0 1px 8px rgba(0,0,0,.6)}
+.arl-name{display:block;font-size:14px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-shadow:0 1px 8px rgba(0,0,0,.6)}
 
-/* ریسپانسیو بر اساس عرض خودِ جایگاه اسلایدر */
+/* ریسپانسیو بر اساس عرض جایگاه اسلایدر */
 @container arlw (max-width:900px){
- .arl{aspect-ratio:4/3;min-height:500px;border-radius:22px}
- .arl-body{right:36px;left:36px;bottom:118px}
- .arl-body h2{font-size:30px}
+ .arl{aspect-ratio:3/2;border-radius:22px}
+ .arl-slide{padding:80px 36px 104px}
+ .arl-body{max-width:68%}
+ .arl-body h2{font-size:clamp(22px,4.2cqw,32px)}
  .arl-body p{font-size:15px;margin-bottom:20px}
- .arl-top{top:22px;right:24px;left:24px}
- .arl-tabs{right:24px;left:24px;gap:12px}
+ .arl-top{top:20px;right:24px;left:24px}
+ .arl-tabs{right:24px;left:24px;gap:12px;bottom:20px}
 }
 @container arlw (max-width:600px){
- .arl{aspect-ratio:auto;height:max(540px,125cqw);min-height:0;border-radius:18px}
- .arl-body{right:20px;left:20px;bottom:92px}
+ .arl{aspect-ratio:3/4;min-height:500px;border-radius:18px}
+ .arl-slide{align-items:flex-end;padding:0 20px 92px}
+ .arl-slide::after{background:linear-gradient(to top,rgba(5,15,29,.94) 0%,rgba(5,15,29,.72) 32%,transparent 60%)}
+ .arl-body{max-width:none}
  .arl-body h2{font-size:clamp(19px,6cqw,26px)}
  .arl-body p,.arl-name{display:none}
  .arl-chip{font-size:12px;padding:5px 12px}
  .arl-btn{padding:11px 22px;font-size:14px}
- .arl-top{top:16px;right:16px;left:16px}
+ .arl-top{top:14px;right:14px;left:14px}
  .arl-label{font-size:12px;padding:6px 14px}
  .arl-arrow{width:38px;height:38px}
  .arl-tabs{right:16px;left:16px;bottom:18px;gap:8px}
  .arl-city{font-size:11px}
 }
-@container arlw (min-width:1300px){
- .arl{aspect-ratio:16/6.5}
- .arl-body{right:72px;bottom:150px;max-width:680px}
- .arl-body h2{font-size:50px}
- .arl-body p{font-size:18px}
- .arl-top{top:36px;right:48px;left:48px}
- .arl-tabs{right:48px;left:48px;bottom:32px}
-}
 @media(prefers-reduced-motion:reduce){
- .arl-slide,.arl-slide img,.arl-body>*,.arl-bg::before{transition:none;animation:none}
+ .arl-slide,.arl-slide img,.arl-body>*{transition:none}
  .arl-tab.on .arl-fill{animation:none;width:100%}
- .arl-tab.on .arl-fill::before,.arl-tab.on .arl-fill::after{animation:none}
 }
 </style>
 
@@ -120,10 +115,10 @@
     <span class="arl-label">نمونه کارهای ما</span>
   </div>
 
-  <!-- اسلاید ۱ -->
+  <!-- اسلاید ۱ (data-m = آدرس عکس موبایل 1080x1440، اختیاری) -->
   <article class="arl-slide on">
     <div class="arl-bg"></div>
-    <img src="https://cdn.imgurl.ir/uploads/h37105_.jpg" alt="فیلتراسیون دیسکی اتوماتیک نیشابور" loading="eager" onerror="this.remove()">
+    <img src="https://cdn.imgurl.ir/uploads/h37105_.jpg" data-m="" alt="فیلتراسیون دیسکی اتوماتیک نیشابور" width="2000" height="1000" loading="eager" decoding="async" onerror="this.remove()">
     <div class="arl-body">
       <div class="arl-chips"><span class="arl-chip">نیشابور</span><span class="arl-chip">فیلتراسیون دیسکی</span></div>
       <h2>فیلتراسیون دیسکی اتوماتیک نیشابور</h2>
@@ -135,7 +130,7 @@
   <!-- اسلاید ۲ -->
   <article class="arl-slide">
     <div class="arl-bg"></div>
-    <img src="https://aralsu.com/wp-content/uploads/REPLACE-2.jpg" alt="پکیج فیلتراسیون دیسکی اتوماتیک یزد" loading="lazy" onerror="this.remove()">
+    <img src="https://aralsu.com/wp-content/uploads/REPLACE-2.jpg" data-m="" alt="پکیج فیلتراسیون دیسکی اتوماتیک یزد" width="2000" height="1000" loading="lazy" decoding="async" onerror="this.remove()">
     <div class="arl-body">
       <div class="arl-chips"><span class="arl-chip">یزد</span><span class="arl-chip">پکیج دیسکی</span></div>
       <h2>پکیج فیلتراسیون دیسکی اتوماتیک یزد</h2>
@@ -147,7 +142,7 @@
   <!-- اسلاید ۳ -->
   <article class="arl-slide">
     <div class="arl-bg"></div>
-    <img src="https://cdn.imgurl.ir/uploads/z67164_.jpg" alt="فیلتراسیون اتوماتیک شنی و اسکرین قزوین" loading="lazy" onerror="this.remove()">
+    <img src="https://cdn.imgurl.ir/uploads/z67164_.jpg" data-m="" alt="فیلتراسیون اتوماتیک شنی و اسکرین قزوین" width="2000" height="1000" loading="lazy" decoding="async" onerror="this.remove()">
     <div class="arl-body">
       <div class="arl-chips"><span class="arl-chip">قزوین</span><span class="arl-chip">شنی و اسکرین</span></div>
       <h2>فیلتراسیون اتوماتیک شنی و اسکرین قزوین</h2>
@@ -159,7 +154,7 @@
   <!-- اسلاید ۴ -->
   <article class="arl-slide">
     <div class="arl-bg"></div>
-    <img src="https://aralsu.com/wp-content/uploads/REPLACE-4.jpg" alt="فیلتر اسکرین و فیلتر شنی نصب شده در اصفهان" loading="lazy" onerror="this.remove()">
+    <img src="https://aralsu.com/wp-content/uploads/REPLACE-4.jpg" data-m="" alt="فیلتر اسکرین و فیلتر شنی نصب شده در اصفهان" width="2000" height="1000" loading="lazy" decoding="async" onerror="this.remove()">
     <div class="arl-body">
       <div class="arl-chips"><span class="arl-chip">اصفهان</span><span class="arl-chip">اسکرین و شنی</span></div>
       <h2>فیلتر اسکرین و فیلتر شنی نصب‌شده در اصفهان</h2>
@@ -183,9 +178,21 @@
   if(!root)return;
   var slides=[].slice.call(root.querySelectorAll('.arl-slide')),
       tabs=[].slice.call(root.querySelectorAll('.arl-tab')),
+      imgs=[].slice.call(root.querySelectorAll('.arl-slide img')),
       count=root.querySelector('.arl-count'),
-      i=0,swiped=false;
+      i=0,swiped=false,x0=null;
   function fa(n){return n.toLocaleString('fa-IR',{minimumIntegerDigits:2});}
+  /* عکس موبایل (data-m) فقط وقتی پر باشد و عرض اسلایدر <= 600 باشد استفاده می‌شود */
+  imgs.forEach(function(m){m.dataset.d=m.getAttribute('src');});
+  function pick(){
+    var mob=root.offsetWidth<=600;
+    imgs.forEach(function(m){
+      var s=(mob&&m.dataset.m)?m.dataset.m:m.dataset.d;
+      if(m.getAttribute('src')!==s)m.src=s;
+    });
+  }
+  pick();
+  if(window.ResizeObserver)new ResizeObserver(pick).observe(root);
   function go(n){
     i=(n+slides.length)%slides.length;
     slides.forEach(function(s,k){s.classList.toggle('on',k===i);s.setAttribute('aria-hidden',k!==i);});
@@ -209,7 +216,6 @@
     if(e.key==='ArrowLeft')go(i+1);
     if(e.key==='ArrowRight')go(i-1);
   });
-  var x0=null;
   root.addEventListener('pointerdown',function(e){x0=e.clientX;swiped=false;});
   root.addEventListener('pointerup',function(e){
     if(x0===null)return;
@@ -217,7 +223,7 @@
     if(Math.abs(dx)>50){swiped=true;go(dx<0?i+1:i-1);}
   });
   root.addEventListener('click',function(e){
-    if(swiped&&e.target.closest('a')){e.preventDefault();}
+    if(swiped&&e.target.closest('a'))e.preventDefault();
     swiped=false;
   },true);
   go(0);
